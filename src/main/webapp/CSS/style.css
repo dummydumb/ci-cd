@@ -1,0 +1,485 @@
+@CHARSET "UTF-8";
+
+/* =====================================================================
+   ipmssys — shared global stylesheet
+   Loaded on every screen through /Utilities/links.jsp.
+   Ported from the original IPMS style.css and recolored to the
+   ipmssys canvas palette (green accent). The app font is declared
+   here ONCE so every page inherits it; screens must not re-declare it.
+
+   Palette
+     accent        #0f5a47    accent-dark   #0b4536
+     accent-tint   #e3efe9    page          #f4f6f3
+     surface       #ffffff    border        #dfe5e0
+     text          #17211d    text-sub      #55635d
+   ===================================================================== */
+
+@font-face {
+    font-family: 'FSEmericLight';
+    src: url('../Fonts/FSEmeric-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'FSEmericLight', Helvetica, 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background-color: #f4f6f3;
+    background-size: cover;
+    background-position-y: center;
+}
+
+/* ---------------------Header------------------------ */
+#systemtitle {
+    color: #17211d;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+#systemtitle:hover {
+    color: #0f5a47;
+    animation: wobble 0.5s ease;
+}
+@keyframes wobble {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(3deg);  color: #0f5a47; }
+    50%  { transform: rotate(-3deg); color: #0f5a47; }
+    75%  { transform: rotate(3deg);  color: #0f5a47; }
+    100% { transform: rotate(0deg); }
+}
+.displayflex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dfe5e0;
+    box-shadow: 0 1px 3px rgba(23, 33, 29, 0.05);
+    font-family: 'FSEmericLight', Helvetica, 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+.header .header_container {
+    min-height: 64px;
+}
+
+.header .logo h2 {
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.navigation .nav-item {
+    position: relative;
+    margin-left: .25rem;
+}
+
+.navigation .nav-item::after {
+    bottom: -2px;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    background: #0f5a47;
+    opacity: 0;
+    transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
+    width: 0;
+}
+
+.navigation .nav-item:hover::after {
+    width: 100%;
+    opacity: 1;
+}
+
+.header .nav-item a,
+.header .nav-link {
+    color: #55635d;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+.header .nav-item a:hover,
+.header .nav-link:hover {
+    color: #0f5a47;
+    background-color: #e3efe9;
+}
+
+/* ---- Dropdown menus ---- */
+.header .dropdown-menu {
+    border: 1px solid #dfe5e0;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px -18px rgba(15, 90, 71, 0.35);
+    padding: 6px;
+}
+.header .dropdown-item {
+    border-radius: 8px;
+    color: #55635d;
+    font-weight: 500;
+}
+.header .dropdown-item:hover,
+.header .dropdown-item:focus {
+    background-color: #e3efe9;
+    color: #0f5a47;
+}
+
+.user_option {
+    border-left: 1px solid #dfe5e0 !important;
+}
+
+.header .burgerbutton {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 2rem;
+    padding: 0 5px;
+}
+
+.header .burgerbutton span {
+    position: relative;
+    height: 3px;
+    width: 25px;
+    background-color: #17211d;
+    border-radius: 2px;
+    pointer-events: none;
+    transition-delay: 100ms;
+}
+
+.header .burgerbutton span::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: -7px;
+    height: 3px;
+    width: 25px;
+    background-color: #17211d;
+    border-radius: 2px;
+    transition: 300ms;
+    pointer-events: none;
+}
+
+.header .burgerbutton span::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: -7px;
+    height: 3px;
+    width: 25px;
+    background-color: #17211d;
+    border-radius: 2px;
+    transition: 300ms;
+    pointer-events: none;
+}
+
+/*=== NOTIFICATION ===*/
+.notificationbell .bell {
+    position: relative;
+    font-size: 1.2rem;
+    color: #55635d;
+    transition: color 0.15s ease;
+}
+.notificationbell .bell:hover {
+    color: #0f5a47;
+}
+
+.notificationbell .bell span {
+    position: absolute;
+    top: 10px;
+    right: 3px;
+    padding: 0 6px;
+    border-radius: 999px;
+    color: #ffffff;
+    background-color: #c0392b;
+    font-size: .55rem;
+    font-weight: 600;
+}
+
+.notifbox {
+    position: fixed;
+    height: auto;
+    width: 320px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 1px solid #dfe5e0;
+    box-shadow: 0 10px 30px -18px rgba(15, 90, 71, 0.35);
+    top: 4.4rem;
+    right: 1.5rem;
+    padding: .5rem;
+    opacity: 0;
+    transition: 250ms ease-in;
+}
+
+.notification_list {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#notifclose, #clearall, #deletenotif {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #0f5a47;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+#clearall:hover, #notifclose:hover, #deletenotif:hover {
+    color: #0b4536;
+}
+
+.notification_item p {
+    font-size: .8rem;
+}
+
+.notification_item {
+    border-bottom: 1px solid #dfe5e0;
+}
+
+/*----------------- For Responsive UI -----------------*/
+@media screen and (max-width: 1023px) {
+    .header .header_container {
+        position: relative;
+        min-height: 56px;
+    }
+
+    .header .dropdown-menu {
+        box-shadow: 0 10px 30px -18px rgba(15, 90, 71, 0.35);
+    }
+
+    .controller {
+        border: 1px solid #dfe5e0;
+        box-shadow: 0 10px 30px -18px rgba(15, 90, 71, 0.35);
+        flex-direction: column-reverse;
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 12px;
+        width: 240px;
+        top: 60px;
+        right: 1rem;
+        transition: 300ms;
+        z-index: 10;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .controller.open {
+        opacity: 1;
+        visibility: visible;
+        transition: 300ms;
+    }
+
+    .navigation .nav-item {
+        width: 100%;
+        margin-left: 0;
+        border-top: 1px solid #dfe5e0;
+    }
+
+    .navigation .nav-item a {
+        text-align: center;
+        width: 100%;
+    }
+
+    .header .burgerbutton {
+        display: flex;
+        padding-right: 2rem;
+    }
+
+    .header .burgerbutton.active span {
+        background-color: rgba(0, 0, 0, 0);
+        transition-delay: 0ms;
+    }
+
+    .header .burgerbutton.active span::before {
+        transform: rotate(140deg);
+        bottom: 0;
+        transition: 300ms;
+    }
+
+    .header .burgerbutton.active span::after {
+        transform: rotate(-140deg);
+        top: 0;
+        transition: 300ms;
+    }
+
+    /*Notification*/
+    .notifbox {
+        width: 90%;
+    }
+}
+
+/*----------------Swal Modal-------------------*/
+.swal2-container {
+    font-family: 'FSEmericLight', Helvetica, 'Segoe UI', sans-serif;
+}
+.swal2-shown > [aria-hidden='true'] {
+    transition: 0.1s filter;
+    filter: blur(5px);
+}
+/*Confirm Button*/
+.swal2-shown .swal2-actions .swal2-confirm {
+    color: #ffffff;
+    background-color: #0f5a47;
+    border: 2px solid #0f5a47;
+    border-radius: 8px;
+}
+.swal2-actions .swal2-confirm:hover {
+    color: #ffffff;
+    background-color: #0b4536;
+    border-color: #0b4536;
+}
+/*Cancel Button*/
+.swal2-shown .swal2-actions .swal2-cancel {
+    color: #17211d;
+    background-color: #ffffff;
+    border: 2px solid #dfe5e0;
+    border-radius: 8px;
+}
+.swal2-actions .swal2-cancel:hover {
+    color: #17211d;
+    background-color: #f4f6f3 !important;
+}
+/*Deny Button*/
+.swal2-shown .swal2-actions .swal2-deny {
+    color: #ffffff;
+    background-color: #a32a1f;
+    border: 2px solid #a32a1f;
+    border-radius: 8px;
+}
+.swal2-actions .swal2-deny:hover {
+    color: #ffffff;
+    background-color: #8a2319;
+}
+
+.swal2-shown .swal2-icon-show {
+    border: 3px solid #0f5a47;
+}
+/*Swal Validation*/
+.swal2-shown .swal2-validation-message {
+    margin: 0;
+    padding: 5px;
+    background-color: #ffffff;
+    color: #ff2f2f;
+}
+
+a .disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: gray;
+    border: none;
+}
+.asterisk {
+    color: #c0392b;
+}
+
+.swal2-popup input[type="text"][readonly],
+.swal2-popup input[type="date"][readonly],
+.swal2-popup textarea[readonly] {
+    background: #fff;
+    pointer-events: none;
+}
+
+/*----------------Scroll Bar-------------------*/
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #f1f3f2;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #b7c2bc;
+    border-radius: 6px;
+    border: 3px solid #f1f3f2;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0f5a47;
+}
+::-webkit-scrollbar-corner {
+    background-color: #f1f3f2;
+}
+
+/*------------Maintenance Content----------------*/
+.content {
+    height: auto;
+    padding: 1.5rem;
+    font-family: 'FSEmericLight', Helvetica, 'Segoe UI', sans-serif;
+}
+
+.content .content_table {
+    height: auto;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #dfe5e0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(23, 33, 29, 0.05);
+}
+
+.content .content_table .dataTables_filter {
+    margin-bottom: 10px;
+}
+
+.selectize-input, .selectize-dropdown .option {
+    text-align: start;
+}
+.selectize-dropdown {
+    z-index: 999;
+}
+
+/*  Loading Spinner  */
+.spinner {
+    margin: auto;
+    width: 70px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(#0f5a47 50%, transparent 20%);
+    animation: spin 1s linear infinite;
+    mask-image: radial-gradient(circle at center, transparent 65%, black 70%);
+    -webkit-mask-image: radial-gradient(circle at center, transparent 65%, black 70%);
+    position: relative;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+/*----------- Global form alignment fix (all swal maintenance forms) -----------*/
+/* Floating-label inputs: keep the label aligned to the input, not double-indented.
+   Several screens used class="ms-2" on floating labels which, combined with the
+   label's own padding, pushed labels out of alignment / overlapping the border. */
+.swal2-popup .form-floating > label.ms-2,
+.swal2-popup .form-floating > label {
+    margin-left: 0 !important;
+    padding-left: 0.9rem !important;
+}
+.swal2-popup .form-floating > .form-control,
+.swal2-popup .form-floating > .form-select {
+    padding-left: 0.9rem;
+}
+/* Rows of fields breathe evenly and never let a floating label overlap the next column */
+.swal2-popup .form-floating { position: relative; }
+.swal2-popup form .row { --bs-gutter-x: 0.75rem; row-gap: 0.5rem; }
+.swal2-popup form .row > [class^="col-"],
+.swal2-popup form .row > [class*=" col-"] { padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5); }
+
+/* Stop the modal body from showing a scrollbar when the form actually fits.
+   swal adds overflow:auto + a max-height; let short forms size to content and
+   only scroll when genuinely taller than the viewport. */
+.swal2-popup .swal2-html-container {
+    /* Let short forms size to content (no phantom scrollbar) and only the
+       whole popup scrolls when a form is genuinely taller than the viewport.
+       overflow stays visible so dropdowns/selects are never clipped. */
+    overflow: visible !important;
+    max-height: none !important;
+    margin: 0.6em 1.4em 0.3em;
+}
+/* Tall forms (e.g. Plotting Summary's per-day hour grid) scroll at the popup
+   level rather than showing a nested phantom scrollbar; short forms sit at
+   content height and never trigger a scroll. Native <select> dropdowns are not
+   clipped by this; the Item screen (Selectize) keeps its own overflow:visible. */
+.swal2-popup { max-height: 94vh; overflow-y: auto; overflow-x: hidden; }
+/* Forms fill the popup width and never force horizontal scroll. */
+.swal2-popup form { max-width: 100%; }
+.swal2-popup form .row { margin-left: 0; margin-right: 0; }

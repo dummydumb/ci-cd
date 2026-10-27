@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tomcat JNDI datasource for IPMSSYS.
+  Copy this file to context.xml (same folder) and fill in your real DB
+  credentials. context.xml itself is gitignored so the password is never
+  committed. The app looks up this pool by the name "jdbc/pool/IPMSSYS"
+  (see GlobalVariables.DB_Connection).
+-->
+<Context>
+    <Resource
+        name="jdbc/pool/IPMSSYS"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="100"
+        maxIdle="30"
+        maxWait="10000"
+        driverClassName="oracle.jdbc.OracleDriver"
+        url="jdbc:oracle:thin:@localhost:1521/freepdb1"
+        username="YOUR_DB_USERNAME"
+        password="YOUR_DB_PASSWORD"
+    />
+</Context>
